@@ -137,6 +137,18 @@ thread_tick (void)
   /* Enforce preemption. */
   if (++thread_ticks >= TIME_SLICE)
     intr_yield_on_return ();
+  
+  //check the thread
+  thread_foreach(thread_check_thicks, NULL);
+}
+
+void
+thread_check_thicks(struct thread *t, void *aux UNUSED){
+  if(t->status == THREAD_BLOCKED && t->ticks > 0){
+    if(--(t->ticks) == 0){
+      thread_unblock(t);
+    }
+  }
 }
 
 /** Prints thread statistics. */

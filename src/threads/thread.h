@@ -100,6 +100,8 @@ struct thread
 
     /* Owned by thread.c. */
     unsigned magic;                     /**< Detects stack overflow. */
+    // record the ticks 
+    int64_t ticks;
   };
 
 /** If false (default), use round-robin scheduler.
@@ -107,8 +109,11 @@ struct thread
    Controlled by kernel command-line option "-o mlfqs". */
 extern bool thread_mlfqs;
 
+//add
 static bool value_less (const struct list_elem *a_, const struct list_elem *b_,
             void *aux UNUSED);
+void thread_check_thicks(struct thread *t, void *aux UNUSED);
+
 void thread_init (void);
 void thread_start (void);
 
