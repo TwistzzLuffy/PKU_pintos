@@ -587,6 +587,7 @@ allocate_tid (void)
 uint32_t thread_stack_ofs = offsetof (struct thread, stack);
 
 //add less function
+//if a > b, return true, otherwise.
 static bool
 value_less (const struct list_elem *a_, const struct list_elem *b_,
             void *aux UNUSED) 
@@ -594,5 +595,5 @@ value_less (const struct list_elem *a_, const struct list_elem *b_,
   const struct thread *a = list_entry (a_, struct thread, elem);
   const struct thread *b = list_entry (b_, struct thread, elem);
   
-  return a->priority < b->priority;
+  return a->priority > b->priority;
 }

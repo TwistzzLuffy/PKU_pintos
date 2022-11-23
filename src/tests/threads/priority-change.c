@@ -8,6 +8,7 @@
 #include "threads/thread.h"
 
 static thread_func changing_thread;
+// static thread_func changing_thread2;
 
 void
 test_priority_change (void) 
@@ -21,6 +22,13 @@ test_priority_change (void)
   thread_set_priority (PRI_DEFAULT - 2);
   msg ("Thread 2 should have just exited.");
 }
+
+// static void
+// changing_thread2 (void *aux UNUSED){
+//   msg("Thread 3 now lowering priority.");
+//   thread_set_priority (PRI_DEFAULT + 2);
+//   msg ("Thread 3 exiting.");
+// }
 
 static void
 changing_thread (void *aux UNUSED) 
