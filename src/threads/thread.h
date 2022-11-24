@@ -110,7 +110,7 @@ struct thread
 extern bool thread_mlfqs;
 
 //add
-static bool value_less (const struct list_elem *a_, const struct list_elem *b_,
+bool value_less (const struct list_elem *a_, const struct list_elem *b_,
             void *aux UNUSED);
 void thread_check_thicks(struct thread *t, void *aux UNUSED);
 

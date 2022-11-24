@@ -142,15 +142,6 @@ thread_tick (void)
   thread_foreach(thread_check_thicks, NULL);
 }
 
-void
-thread_check_thicks(struct thread *t, void *aux UNUSED){
-  if(t->status == THREAD_BLOCKED && t->ticks > 0){
-    if(--(t->ticks) == 0){
-      thread_unblock(t);
-    }
-  }
-}
-
 /** Prints thread statistics. */
 void
 thread_print_stats (void) 
@@ -212,7 +203,7 @@ thread_create (const char *name, int priority,
 
   /* Add to run queue. */
   thread_unblock (t);
-
+  thread_yield();
   return tid;
 }
 
@@ -351,6 +342,7 @@ void
 thread_set_priority (int new_priority) 
 {
   thread_current ()->priority = new_priority;
+  thread_yield();
 }
 
 /** Returns the current thread's priority. */
@@ -600,7 +592,7 @@ uint32_t thread_stack_ofs = offsetof (struct thread, stack);
 
 //add less function
 //if a > b, return true, otherwise.
-static bool
+bool
 value_less (const struct list_elem *a_, const struct list_elem *b_,
             void *aux UNUSED) 
 {
@@ -608,4 +600,14 @@ value_less (const struct list_elem *a_, const struct list_elem *b_,
   const struct thread *b = list_entry (b_, struct thread, elem);
   
   return a->priority > b->priority;
+}
+
+// to check every
+void
+thread_check_thicks(struct thread *t, void *aux UNUSED){
+  if(t->status == THREAD_BLOCKED && t->ticks > 0){
+    if(--(t->ticks) == 0){
+      thread_unblock(t);
+    }
+  }
 }
