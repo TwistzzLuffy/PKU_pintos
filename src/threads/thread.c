@@ -611,3 +611,14 @@ thread_check_thicks(struct thread *t, void *aux UNUSED){
     }
   }
 }
+
+// bool
+// compare_cond_less(const struct list_elem *a_, const struct list_elem *b_,
+//                   void *aux UNUSED)
+// {
+//   const struct semaphore_elem *a = list_entry(a_, struct semaphore_elem, elem);
+//   const struct semaphore_elem *b = list_entry(b_, struct semaphore_elem, elem);
+  
+//   return list_entry(list_front(&a->semaphore.waiters), struct thread, elem)->priority > list_entry(list_front(&b->semaphore.waiters), 
+//   struct thread, elem)->priority;
+// }
